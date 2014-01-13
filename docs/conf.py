@@ -28,6 +28,29 @@
 # Load all of the global Astropy configuration
 from astropy_helpers.sphinx.conf import *
 
+import sys
+
+class Mock(object):
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def __call__(self, *args, **kwargs):
+        return Mock()
+
+    @classmethod
+    def __getattr__(cls, name):
+        if name in ('__file__', '__path__'):
+            return '/dev/null'
+        elif name[0] == name[0].upper():
+            mockType = type(name, (), {})
+            mockType.__module__ = __name__
+            return mockType
+        else:
+            return Mock()
+
+MOCK_MODULES = ['numpy', 'astropy', 'matplotlib']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = Mock()
 
 # -- General configuration ----------------------------------------------------
 
@@ -133,26 +156,4 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 #edit_on_github_source_root = ""
 #edit_on_github_doc_root = "docs"
 
-import sys
 
-class Mock(object):
-    def __init__(self, *args, **kwargs):
-        pass
-
-    def __call__(self, *args, **kwargs):
-        return Mock()
-
-    @classmethod
-    def __getattr__(cls, name):
-        if name in ('__file__', '__path__'):
-            return '/dev/null'
-        elif name[0] == name[0].upper():
-            mockType = type(name, (), {})
-            mockType.__module__ = __name__
-            return mockType
-        else:
-            return Mock()
-
-MOCK_MODULES = ['numpy', 'astropy', 'matplotlib']
-for mod_name in MOCK_MODULES:
-    sys.modules[mod_name] = Mock()
