@@ -1,1 +1,1 @@
-git://github.com/astrofrog/astropy_helpers.git#egg=astropy_helpers
+git+git://github.com/astrofrog/astropy_helpers.git#egg=astropy_helpers
