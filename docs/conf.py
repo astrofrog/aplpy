@@ -79,9 +79,9 @@ copyright = u'2012-13, ' + author
 
 import aplpy
 # The short X.Y version.
-version = aplpy.__version__.split('-', 1)[0]
+version = "0.9.12.dev"
 # The full version, including alpha/beta/rc tags.
-release = aplpy.__version__
+release = "0.9.12.dev"
 
 
 # -- Options for HTML output ---------------------------------------------------
