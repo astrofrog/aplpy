@@ -77,7 +77,6 @@ copyright = u'2012-13, ' + author
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 
-import aplpy
 # The short X.Y version.
 version = "0.9.12.dev"
 # The full version, including alpha/beta/rc tags.
