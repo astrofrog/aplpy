@@ -19,7 +19,8 @@ builtins._ASTROPY_SETUP_ = True
 
 from astropy_helpers.setup_helpers import (register_commands, adjust_compiler,
                                            get_debug_option)
-from astropy_helpers.version_helpers import get_git_devstr, generate_version_py
+from astropy_helpers.version_helpers import generate_version_py
+from astropy_helpers.git_helpers import get_git_devstr
 
 # Set affiliated package-specific settings
 PACKAGEFULLNAME = 'APLpy'
@@ -50,7 +51,7 @@ cmdclassd = register_commands(PACKAGENAME, VERSION, RELEASE)
 adjust_compiler(PACKAGENAME)
 
 # Freeze build information in version.py
-generate_version_py(PACKAGENAME, VERSION, RELEASE, get_debug_option())
+generate_version_py(PACKAGENAME, VERSION, RELEASE, get_debug_option(PACKAGENAME))
 
 # Treat everything in scripts except README.rst as a script to be installed
 scripts = [fname for fname in glob.glob(os.path.join('scripts', '*'))
