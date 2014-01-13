@@ -108,26 +108,6 @@ def test(package=None, test_path=None, args=None, plugins=None,
         remote_data=remote_data, pep8=pep8, pdb=pdb,
         coverage=coverage, open_files=open_files, **kwargs)
 
-if not _ASTROPY_SETUP_:
-
-    import os
-    from warnings import warn
-    from astropy import config
-
-    # add these here so we only need to cleanup the namespace at the end
-    config_dir = None
-
-    if not os.environ.get('ASTROPY_SKIP_CONFIG_UPDATE', False):
-        config_dir = os.path.dirname(__file__)
-        try:
-            config.configuration.update_default_config(__package__, config_dir)
-        except config.configuration.ConfigurationDefaultMissingError as e:
-            wmsg = (e.args[0] + " Cannot install default profile. If you are "
-                    "importing from source, this is expected.")
-            warn(config.configuration.ConfigurationDefaultMissingWarning(wmsg))
-            del e
-
-    del os, warn, config_dir  # clean up namespace
 
 from .aplpy import FITSFigure
 from .rgb import make_rgb_image, make_rgb_cube
